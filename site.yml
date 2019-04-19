@@ -4,7 +4,7 @@
   hosts: localhost
   tasks:
 
-  - name: Retrieve List of tickers that we want to check from Holden's personal GitHub.
+  - name: Retrieve list of tickers that we want to check from Holden's personal GitHub.
     uri:
       method: GET
       return_content: yes
@@ -12,11 +12,41 @@
       validate_certs: no
     register: fetch_result
 
-  - name: Set Fact
+  - name: Assign content from previous URI call to an Ansible object.
     set_fact:
-      result_json: "{{ fetch_result.content | from_json }}"
+      result_friendly: "{{ fetch_result.content | from_json }}"
+
+  - name: Look up quotes for specified ticker symbols.
+    uri:
+      method: GET
+      return_content: yes
+      url: "{{ base_av_url }}function={{ av_function }}&symbol={{ item }}&apikey={{ av_api_key }}"
+      status_code: 200
+      validate_certs: no
+    register: quote_list
+    loop: "{{ result_friendly.tickers }}"
+
+  - name: Create dictionary that is symbol:price to get rid of a bunch of gross.
+    set_fact:
+            quotes: "{{ quotes | default([]) + [{ item.json['Global Quote']['01. symbol']: item.json['Global Quote']['05. price']} ] }}"
+            #quotes: "{{ quotes | default([]) + [{'symbol': item.json['Global Quote']['01. symbol'], 'price': item.json['Global Quote']['05. price']} ] }}"
+    loop: "{{ quote_list.results }}"
 
   - name: debug
     debug:
-      msg: "{{ item }}"
-    loop: "{{ result_json.tickers }}"
+      msg: "{{ quotes }}"
+
+  - name: Remove a stupid file
+    file:
+      path: index.html
+      state: absent
+
+
+  - name: Create index.html
+    template:
+      src: templates/index.html.j2
+      dest: index.html
+
+  - name: Push index out to remote server.
+    shell: "scp -P 443 index.html root@holden.gg:/var/www/html/"
+    ignore_errors: true

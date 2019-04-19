@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HYSE lmao</title>
+</head>
+<body>
+<h1> welcome to the holden stock exchange garbage </h1>
+
+{% for dict_item in quotes %}
+   {% for key, value in dict_item.items() %}
+      <marquee scrollamount="30"><font face="Comic Sans MS">Stock: {{key}}</font></marquee>
+      <marquee><font face="Comic Sans MS">Current Price: {{value}}</font></marquee><BR>
+   {% endfor %}
+{% endfor %}
+
+<h1> we hope u enjoyed ur stay  </h1>
+
+</body>
+</html>
