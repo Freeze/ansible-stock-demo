@@ -8,8 +8,8 @@
 
 {% for dict_item in quotes %}
    {% for key, value in dict_item.items() %}
-      <marquee scrollamount="30"><font face="Comic Sans MS">Stock: {{key}}</font></marquee>
-      <marquee><font face="Comic Sans MS">Current Price: {{value}}</font></marquee><BR>
+      <marquee scrollamount="{{ range(1, 45) | random }}"><font face="Comic Sans MS">Stock: {{key}}</font></marquee>
+      <marquee scrollamount="{{ range(1, 45) | random }}"><font face="Comic Sans MS">Current Price: {{value}}</font></marquee><BR>
    {% endfor %}
 {% endfor %}
 
