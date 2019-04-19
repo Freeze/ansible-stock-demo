@@ -1,0 +1,17 @@
+---
+- name: Holden_Stock_Thing
+  gather_facts: false
+  hosts: localhost
+  tasks:
+
+  - name: Retrieve List of tickers that we want to check from Holden's personal GitHub.
+    uri:
+      method: GET
+      return_content: yes
+      url: "{{ list_url }}"
+      validate_certs: no
+    register: fetch_result
+
+  - name: Debug
+    debug:
+      msg: "{{ fetch_result.content }}"
