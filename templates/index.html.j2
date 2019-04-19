@@ -5,11 +5,11 @@
 </head>
 <body>
 <h1> welcome to the holden stock exchange garbage </h1>
-
+{% set hexchar = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'] %}
 {% for dict_item in quotes %}
    {% for key, value in dict_item.items() %}
-      <marquee scrollamount="{{ range(1, 45) | random }}"><font face="Comic Sans MS">Stock: {{key}}</font></marquee>
-      <marquee scrollamount="{{ range(1, 45) | random }}"><font face="Comic Sans MS">Current Price: {{value}}</font></marquee><BR>
+      <marquee scrollamount="{{ range(1, 45) | random }}"><font face="Comic Sans MS" color="{{ hexchar | random }}{{ hexchar | random }}{{ hexchar | random }}{{ hexchar | random }}{{ hexchar | random }}{{ hexchar | random }}">Stock: {{key}}</font></marquee>
+      <marquee scrollamount="{{ range(1, 45) | random }}"><font face="Comic Sans MS" color="{{ hexchar | random }}{{ hexchar | random }}{{ hexchar | random }}{{ hexchar | random }}{{ hexchar | random }}{{ hexchar | random }}">Current Price: {{value}}</font></marquee><BR>
    {% endfor %}
 {% endfor %}
 
