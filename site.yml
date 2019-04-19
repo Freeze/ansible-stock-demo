@@ -12,6 +12,11 @@
       validate_certs: no
     register: fetch_result
 
-  - name: Debug
+  - name: Set Fact
+    set_fact:
+      result_json: "{{ fetch_result.content | from_json }}"
+
+  - name: debug
     debug:
-      msg: "{{ fetch_result.content }}"
+      msg: "{{ item }}"
+    loop: "{{ result_json.tickers }}"
