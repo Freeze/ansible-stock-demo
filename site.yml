@@ -2,6 +2,8 @@
 - name: Holden_Stock_Thing
   gather_facts: false
   hosts: localhost
+  vars:
+    silly_skip: "lol"
   tasks:
 
   - name: Retrieve list of tickers that we want to check from Holden's personal GitHub.
@@ -11,6 +13,16 @@
       url: "{{ list_url }}"
       validate_certs: no
     register: fetch_result
+
+  - name: Check if old status file exists
+    stat:
+      path: state.json
+    register: stat_result
+
+  - name: Grab values of previous run to calculate differences.
+    set_fact:
+      old_quotes: "{{ lookup('file','state.json') }}"
+    when: stat_result.stat.exists == true
 
   - name: Assign content from previous URI call to an Ansible object.
     set_fact:
@@ -26,21 +38,18 @@
     register: quote_list
     loop: "{{ result_friendly.tickers }}"
 
-  - name: Create dictionary that is symbol:price to get rid of a bunch of gross.
+  - name: Fresh Start
     set_fact:
-            quotes: "{{ quotes | default([]) + [{ item.json['Global Quote']['01. symbol']: item.json['Global Quote']['05. price']} ] }}"
-            #quotes: "{{ quotes | default([]) + [{'symbol': item.json['Global Quote']['01. symbol'], 'price': item.json['Global Quote']['05. price']} ] }}"
+      quotes: "{{ quotes | default({}) | combine({ item.json['Global Quote']['01. symbol']: item.json['Global Quote']['05. price'] | float}) }}"
     loop: "{{ quote_list.results }}"
-
-  - name: debug
-    debug:
-      msg: "{{ quotes }}"
 
   - name: Remove a stupid file
     file:
       path: index.html
       state: absent
 
+  - name: Dump results to a "state" file
+    local_action: copy content="{{ quotes }}" dest=state.json
 
   - name: Create index.html
     template:
