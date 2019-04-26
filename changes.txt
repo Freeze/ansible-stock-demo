@@ -21,3 +21,8 @@ ADSK changed!  Old Price: 176.15 New Price: 176.07 Difference: 0.08- 20190426133
 ADP changed!  Old Price: 163.07 New Price: 163.17 Difference: -0.1- 20190426133611
 FB changed!  Old Price: 191.0113 New Price: 191.05 Difference: -0.0387- 20190426133611
 LULU changed!  Old Price: 176.7871 New Price: 176.87 Difference: -0.0829- 20190426133611
+ADSK changed!  Old Price: 176.07 New Price: 176.01 Difference: 0.06- 20190426133919
+ADP changed!  Old Price: 163.17 New Price: 163.22 Difference: -0.05- 20190426133919
+BIDU changed!  Old Price: 165.99 New Price: 165.94 Difference: 0.05- 20190426133919
+FB changed!  Old Price: 191.05 New Price: 191.31 Difference: -0.26- 20190426133919
+LULU changed!  Old Price: 176.87 New Price: 176.9 Difference: -0.03- 20190426133919

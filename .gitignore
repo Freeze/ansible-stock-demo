@@ -1,3 +1,4 @@
 *.retry
 *.html
 state.json
+changes.txt
