@@ -1,4 +1,4 @@
-# Stock to Html Information Tool
+# Stock to HTML Information Tool
 
 This was made for a demo of some of the things you can do with Ansible for a demonstration at work.
 
