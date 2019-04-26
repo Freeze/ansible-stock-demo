@@ -1,2 +1,3 @@
 *.retry
 *.html
+state.json
