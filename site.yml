@@ -4,6 +4,10 @@
   hosts: localhost
   tasks:
 
+  - name: Generate a timestamp
+    set_fact:
+      timestamp: "{{ lookup('pipe','date +%Y%m%d%H%M%S') }}"
+
   - name: Retrieve list of tickers that we want to check from Holden's personal GitHub.
     uri:
       method: GET
@@ -41,10 +45,23 @@
       quotes: "{{ quotes | default({}) | combine({ item.json['Global Quote']['01. symbol']: item.json['Global Quote']['05. price'] | float}) }}"
     loop: "{{ quote_list.results }}"
 
-  - name: Remove any previous index.html file. (Who needs to be idempotent anyway?)
-    file:
-      path: index.html
-      state: absent
+  - name: Make sure changes.txt exists
+    stat:
+      path: changes.txt
+    register: changes_stat
+
+  - name: Create changes.txt if you need to
+    copy:
+      content: ""
+      dest: changes.txt
+    when: changes_stat.stat.exists == false      
+
+  - name: Compare Old and New Quotes
+    lineinfile:
+      path: changes.txt
+      line: "{{ item }} changed!  Old Price: {{ old_quotes[item]}} New Price: {{ quotes[item] }} Difference: {{ old_quotes[item] - quotes[item] }}- {{ timestamp }}"
+    loop: "{{ result_friendly.tickers }}"
+    when: old_quotes[item] != quotes[item]
 
   - name: Dump results to a "state" file
     local_action: copy content="{{ quotes }}" dest=state.json
@@ -54,6 +71,6 @@
       src: templates/index.html.j2
       dest: index.html
 
-  - name: Push index out to remote server.  I have an SSH key on my machine that allows me to talk to this server.  
+  - name: Push index out to remote server.  I have an SSH key on my machine that allows me to talk to this server.
     shell: "scp -P 443 index.html root@holden.gg:/var/www/html/"
     ignore_errors: true

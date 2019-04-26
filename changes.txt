@@ -1,0 +1,23 @@
+176.7264 changed!
+163.44 changed!
+164.86 changed!
+191.39 changed!
+176.98 changed!
+ADSK changed!  Old Price: 176.67 New Price: 176.64 - 20190426104912
+BIDU changed!  Old Price: 166.3 New Price: 166.11 - 20190426104912
+FB changed!  Old Price: 192.37 New Price: 192.31 - 20190426104912
+LULU changed!  Old Price: 176.96 New Price: 176.76 - 20190426104912
+ADSK changed!  Old Price: 176.64 New Price: 176.465 Difference: 0.175- 20190426112401
+ADP changed!  Old Price: 163.32 New Price: 163.1 Difference: 0.22- 20190426112401
+BIDU changed!  Old Price: 166.11 New Price: 165.46 Difference: 0.65- 20190426112401
+FB changed!  Old Price: 192.31 New Price: 191.64 Difference: 0.67- 20190426112401
+LULU changed!  Old Price: 176.76 New Price: 176.32 Difference: 0.44- 20190426112401
+ADSK changed!  Old Price: 176.465 New Price: 176.15 Difference: 0.315- 20190426133322
+ADP changed!  Old Price: 163.1 New Price: 163.07 Difference: 0.03- 20190426133322
+BIDU changed!  Old Price: 165.46 New Price: 165.99 Difference: -0.53- 20190426133322
+FB changed!  Old Price: 191.64 New Price: 191.0113 Difference: 0.6287- 20190426133322
+LULU changed!  Old Price: 176.32 New Price: 176.7871 Difference: -0.4671- 20190426133322
+ADSK changed!  Old Price: 176.15 New Price: 176.07 Difference: 0.08- 20190426133611
+ADP changed!  Old Price: 163.07 New Price: 163.17 Difference: -0.1- 20190426133611
+FB changed!  Old Price: 191.0113 New Price: 191.05 Difference: -0.0387- 20190426133611
+LULU changed!  Old Price: 176.7871 New Price: 176.87 Difference: -0.0829- 20190426133611
