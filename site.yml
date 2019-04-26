@@ -1,9 +1,7 @@
 ---
-- name: Holden_Stock_Thing
+- name: StocktoHtmlInformationTool
   gather_facts: false
   hosts: localhost
-  vars:
-    silly_skip: "lol"
   tasks:
 
   - name: Retrieve list of tickers that we want to check from Holden's personal GitHub.
@@ -24,7 +22,7 @@
       old_quotes: "{{ lookup('file','state.json') }}"
     when: stat_result.stat.exists == true
 
-  - name: Assign content from previous URI call to an Ansible object.
+  - name: Assign content from previous URI call to a non-json object. (I don't know if this is actually needed.)
     set_fact:
       result_friendly: "{{ fetch_result.content | from_json }}"
 
@@ -38,12 +36,12 @@
     register: quote_list
     loop: "{{ result_friendly.tickers }}"
 
-  - name: Fresh Start
+  - name: Create a dict that is ticker:price.
     set_fact:
       quotes: "{{ quotes | default({}) | combine({ item.json['Global Quote']['01. symbol']: item.json['Global Quote']['05. price'] | float}) }}"
     loop: "{{ quote_list.results }}"
 
-  - name: Remove a stupid file
+  - name: Remove any previous index.html file. (Who needs to be idempotent anyway?)
     file:
       path: index.html
       state: absent
@@ -56,6 +54,6 @@
       src: templates/index.html.j2
       dest: index.html
 
-  - name: Push index out to remote server.
+  - name: Push index out to remote server.  I have an SSH key on my machine that allows me to talk to this server.  
     shell: "scp -P 443 index.html root@holden.gg:/var/www/html/"
     ignore_errors: true

@@ -5,10 +5,10 @@
 </head>
 <body>
 <h1> welcome to the holden stock exchange garbage </h1>
-{% set hexchar = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'] %}
+{% set hc = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'] %}
 {% for k,v in quotes.iteritems()|sort(attribute=1,reverse=True) %}
-      <marquee scrollamount="{{ range(1, 45) | random }}"><font face="Comic Sans MS" color="{{ hexchar | random }}{{ hexchar | random }}{{ hexchar | random }}{{ hexchar | random }}{{ hexchar | random }}{{ hexchar | random }}">Stock: {{k}}</font></marquee>
-      <marquee scrollamount="{{ range(1, 45) | random }}"><font face="Comic Sans MS" color="{{ hexchar | random }}{{ hexchar | random }}{{ hexchar | random }}{{ hexchar | random }}{{ hexchar | random }}{{ hexchar | random }}">Current Price: {{v}} (Previous Price: {{ old_quotes[k]}}) (Change: {{ old_quotes[k] - quotes[k] }})</font></marquee><BR>
+      <marquee scrollamount="{{ range(1, 45) | random}}"><font face="Comic Sans MS" color="{{hc|random}}{{hc|random}}{{hc|random}}{{hc|random}}{{hc|random}}{{hc|random}}">Stock: {{k}}</font></marquee>
+      <marquee scrollamount="{{ range(1, 45) | random}}"><font face="Comic Sans MS" color="{{hc|random}}{{hc|random}}{{hc|random}}{{hc|random}}{{hc|random}}{{hc|random}}">Current Price: {{v}} (Previous Price: {{ old_quotes[k]}}) (Change: {{ old_quotes[k] - quotes[k] }})</font></marquee><BR>
 {% endfor %}
 
 <h1> we hope u enjoyed ur stay  </h1>
